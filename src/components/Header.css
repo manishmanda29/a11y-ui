@@ -1,0 +1,223 @@
+.HEADER {
+    background-color: #4584ff;
+    border-radius: 20px 20px 0px 0px;
+    height: 75px;
+    overflow: hidden;
+    position: relative;
+    width: 1436px;
+  }
+  
+  .HEADER .line {
+    height: 42px;
+    left: 257px;
+    object-fit: cover;
+    position: absolute;
+    top: 19px;
+    width: 1px;
+  }
+  
+  .HEADER .text-wrapper {
+    color: #ffffff;
+    font-family: "Plus Jakarta Sans-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    left: 550px;
+    letter-spacing: 0;
+    line-height: normal;
+    opacity: 0.5;
+    position: absolute;
+    text-align: center;
+    top: 31px;
+    width: 100px;
+  }
+  
+  .HEADER .overlap {
+    height: 32px;
+    left: 309px;
+    position: absolute;
+    top: 28px;
+    width: 241px;
+  }
+  
+  .HEADER .div {
+    color: #ffffff;
+    font-family: "Plus Jakarta Sans-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    left: 141px;
+    letter-spacing: 0;
+    line-height: normal;
+    opacity: 0.5;
+    position: absolute;
+    text-align: center;
+    top: 2px;
+    width: 100px;
+  }
+  
+  .HEADER .group {
+    height: 23px;
+    left: 0;
+    position: absolute;
+    top: 2px;
+    width: 49px;
+  }
+  
+  .HEADER .group-2 {
+    height: 23px;
+    position: relative;
+    width: 51px;
+  }
+  
+  .HEADER .text-wrapper-2 {
+    color: #ffffff;
+    font-family: "Outfit-Bold", Helvetica;
+    font-size: 14px;
+    font-weight: 700;
+    left: 5px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 0;
+  }
+  
+  .HEADER .img {
+    height: 2px;
+    left: 0;
+    position: absolute;
+    top: 21px;
+    width: 49px;
+  }
+  
+  .HEADER .text-wrapper-3 {
+    color: #ffffff;
+    font-family: "Outfit-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    left: 49px;
+    letter-spacing: 0;
+    line-height: normal;
+    opacity: 0.5;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100px;
+  }
+  
+  .HEADER .frame {
+    align-items: flex-start;
+    background-color: #ffffff;
+    border-radius: 28px;
+    display: flex;
+    gap: 10px;
+    height: 35px;
+    left: 1171px;
+    padding: 8px 16px;
+    position: absolute;
+    top: 22px;
+    width: 94px;
+  }
+  
+  .HEADER .text-wrapper-4 {
+    color: #4584ff;
+    font-family: "Outfit-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-right: -8px;
+    margin-top: -1px;
+    position: relative;
+    text-align: center;
+    width: 70px;
+  }
+  
+  .HEADER .div-wrapper {
+    align-items: flex-start;
+    background-color: #ffffff;
+    border-radius: 28px;
+    display: flex;
+    gap: 10px;
+    height: 35px;
+    left: 1293px;
+    padding: 8px 16px;
+    position: absolute;
+    top: 22px;
+    width: 94px;
+  }
+  
+  .HEADER .text-wrapper-5 {
+    color: #ffffff;
+    font-family: "Plus Jakarta Sans-SemiBold", Helvetica;
+    font-size: 16px;
+    font-weight: 600;
+    left: 663px;
+    letter-spacing: 0;
+    line-height: normal;
+    opacity: 0.5;
+    position: absolute;
+    text-align: center;
+    top: 29px;
+    width: 127px;
+  }
+  
+  .HEADER .text-wrapper-6 {
+    color: #ffffff;
+    font-family: "Plus Jakarta Sans-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    left: 805px;
+    letter-spacing: 0;
+    line-height: normal;
+    opacity: 0.5;
+    position: absolute;
+    text-align: center;
+    top: 30px;
+    width: 170px;
+  }
+  
+  .HEADER .overlap-group-wrapper {
+    height: 52px;
+    left: 50px;
+    position: absolute;
+    top: 10px;
+    width: 164px;
+  }
+  
+  .HEADER .overlap-group {
+    height: 52px;
+    position: relative;
+    width: 166px;
+  }
+  
+  .HEADER .group-3 {
+    height: 32px;
+    left: 33px;
+    position: absolute;
+    top: 17px;
+    width: 133px;
+  }
+  
+  .HEADER .text-wrapper-7 {
+    color: #ffffff;
+    font-family: "Plus Jakarta Sans-SemiBold", Helvetica;
+    font-size: 32px;
+    font-weight: 600;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    white-space: nowrap;
+    width: 131px;
+  }
+  
+  .HEADER .logo-shapes {
+    height: 52px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 51px;
+  }
+  
