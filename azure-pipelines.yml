@@ -1,0 +1,18 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+- task: Npm@1
+  displayName: "Install Packages"
+  inputs:
+    command: custom
+    customCommand: npm i
+    workingDir: /
