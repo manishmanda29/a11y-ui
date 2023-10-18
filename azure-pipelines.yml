@@ -23,7 +23,13 @@ steps:
 - task: ArchiveFiles@2
   displayName: "Zip the build"
   inputs:
-    archiveFile: "a11y-react-app"
+    archiveFile: "a11y-react-app.zip"
     archiveType: zip
     includeRootFolder: false
     rootFolderOrFile: "build"
+
+- task: PublishPipelineArtifact@1
+  displayName: "Publish a11y react app"
+  inputs:
+    artifact: "a11y-react-app"
+    targetPath: "a11y-react-app.zip"
