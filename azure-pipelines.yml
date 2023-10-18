@@ -13,6 +13,4 @@ steps:
 - task: Npm@1
   displayName: "Install Packages"
   inputs:
-    command: custom
-    customCommand: install
-    workingDir: /
+    command: install
