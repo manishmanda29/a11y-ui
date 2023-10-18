@@ -32,7 +32,7 @@ export const SignUp = () => {
                             <div>
                             <p className="sign-up">
                                 <span className="span"></span>
-                                <span className="text-wrapper-2">Sign Up</span>
+                                <span className="text-wrapper-2">Sign Up Manda</span>
                             </p>
                           
                         </div>
