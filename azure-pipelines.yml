@@ -19,3 +19,11 @@ steps:
   inputs:
     command: custom
     customCommand: run build
+
+- task: ArchiveFiles@2
+  displayName: "Zip the build"
+  inputs:
+    archiveFile: "a11y-react-app"
+    archiveType: zip
+    includeRootFolder: false
+    rootFolderOrFile: "build"
