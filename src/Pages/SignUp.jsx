@@ -3,8 +3,14 @@ import "./Signup.css";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Footer from "../components/Footer.jsx";
 import SignUpImage from '../images/SignUp.png'
+import axios from 'axios'
 
 export const SignUp = () => {
+
+    const register=()=>{
+
+    }
+
     return (
         <div className="desktop">
             <div className="group-wrapper">
@@ -36,11 +42,21 @@ export const SignUp = () => {
                             validate={values => {
                                 const errors = {};
                                 if (!values.email) {
-                                    errors.email = 'Required';
+                                    errors.email = 'Email is Required';
                                 } else if (
                                     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                                 ) {
                                     errors.email = 'Invalid email address';
+                                }
+                                else if(
+                                    values.password===''
+                                )
+                                {
+                                    errors.password='Password is Required'
+                                }
+                                else if(values.password!=values.confirmpassword)
+                                {
+                                    errors.confirmpassword='passwords donot match '
                                 }
                                 return errors;
                             }}
