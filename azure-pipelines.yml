@@ -14,3 +14,8 @@ steps:
   displayName: "Install Packages"
   inputs:
     command: install
+- task: Npm@1
+  displayName: "Build Package"
+  inputs:
+    command: custom
+    customCommand: run build
