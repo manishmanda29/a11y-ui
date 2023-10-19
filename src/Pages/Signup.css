@@ -94,8 +94,9 @@
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 70px;
+    top: 40px;
     width: 354px;
+    left:200px;
   }
   
   .desktop .span {
