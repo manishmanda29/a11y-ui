@@ -3,7 +3,7 @@ import {Header} from '../components/Header.jsx'
 
 
 
-export const Home=()=>{
+export  default function Home(){
     return(
         <Header/>
     )

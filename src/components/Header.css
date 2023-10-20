@@ -1,223 +1,261 @@
-.HEADER {
-    background-color: #4584ff;
-    border-radius: 20px 20px 0px 0px;
-    height: 75px;
-    overflow: hidden;
-    position: relative;
-    width: 1436px;
+nav {
+
+  display: -webkit-flex;
+
+  display: -moz-flex;
+
+  display: -ms-flex;
+
+  display: -o-flex;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 20px 100px;
+
+  color: #fff;
+
+  background: #4584FF;
+
+}
+
+.logo {
+
+  font-size: 25px;
+
+  color: #fff;
+
+  padding: 0 15px;
+
+}
+
+.menu ul li {
+
+  display: inline-block;
+
+  margin: 0 15px;
+
+}
+
+.menu ul li a {
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  font-weight: bold;
+
+  font-size: 18px;
+
+  text-transform: uppercase;
+
+  font-family: montserrat;
+
+  color: #fff;
+
+  padding: 5px 15px;
+
+}
+
+.menu ul li a:hover{
+
+  background: rgb(0, 0, 20);
+
+}
+
+.socials a {
+
+  text-decoration: none;
+
+  border-radius: 25px;
+
+  background: white;
+
+  color:#4584FF;
+
+  ;
+
+  padding: 5px 15px;
+
+}
+
+.header {
+
+  height: 100vh;
+
+  /* background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(homepage_SE_project.jpg); */
+
+  -webkit-background-size: cover;
+
+  background-size: cover;
+
+  background-position: center center;
+
+  background-repeat: no-repeat;
+
+}
+
+.banner-text {
+
+  color: #fff;
+
+  position: absolute;
+
+  top: 70%;
+
+  left: 26%;
+
+  transform: translate(-50%, -50%);
+
+  text-align: left;
+
+}
+
+.banner-text h1 {
+
+  font-size: 60px;
+
+  margin: 0;
+
+}
+
+.banner-text p {
+
+  margin: 15px 0 40px;
+
+}
+
+.banner-text button {
+
+  background: white;
+
+  border: none;
+
+  outline: none;
+
+  border-radius: 20px;
+
+  color: #4584FF;
+
+  padding: 10px 30px;
+
+  font-size: 20px;
+
+  font-family: montserrat;
+
+  margin-left: 1500px;
+
+  display: inline-block;
+
+}
+
+@media (max-width: 1500px) {
+
+  nav {
+
+      flex-direction: column;
+
+      align-items: flex;
+
   }
-  
-  .HEADER .line {
-    height: 42px;
-    left: 257px;
-    object-fit: cover;
-    position: absolute;
-    top: 19px;
-    width: 1px;
+
+  .menu ul {
+
+      padding: 0;
+
   }
-  
-  .HEADER .text-wrapper {
-    color: #ffffff;
-    font-family: "Plus Jakarta Sans-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    left: 550px;
-    letter-spacing: 0;
-    line-height: normal;
-    opacity: 0.5;
-    position: absolute;
-    text-align: center;
-    top: 31px;
-    width: 100px;
+
+  .menu ul li {
+
+      margin: 0 15px 0 0;
+
   }
-  
-  .HEADER .overlap {
-    height: 32px;
-    left: 309px;
-    position: absolute;
-    top: 28px;
-    width: 241px;
+
+  .socials {
+
+      margin-top: 25px;
+
   }
-  
-  .HEADER .div {
-    color: #ffffff;
-    font-family: "Plus Jakarta Sans-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    left: 141px;
-    letter-spacing: 0;
-    line-height: normal;
-    opacity: 0.5;
-    position: absolute;
-    text-align: center;
-    top: 2px;
-    width: 100px;
+
+  .banner-text {
+
+      left: 50%;
+
+      text-align: center;
+
+      width: 70%;
+
   }
-  
-  .HEADER .group {
-    height: 23px;
-    left: 0;
-    position: absolute;
-    top: 2px;
-    width: 49px;
+
+  .banner-text h1 {
+
+      font-size: 40px;
+
   }
-  
-  .HEADER .group-2 {
-    height: 23px;
-    position: relative;
-    width: 51px;
+
+}
+
+@media (max-width: 1000px) {
+
+  .logo {
+
+      margin-top: 0;
+
+      font-size: 17px;
+
   }
-  
-  .HEADER .text-wrapper-2 {
-    color: #ffffff;
-    font-family: "Outfit-Bold", Helvetica;
-    font-size: 14px;
-    font-weight: 700;
-    left: 5px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    text-align: center;
-    top: 0;
+
+  nav {
+
+      padding: 15px;
+
   }
-  
-  .HEADER .img {
-    height: 2px;
-    left: 0;
-    position: absolute;
-    top: 21px;
-    width: 49px;
+
+  .menu ul li a {
+
+      font-size: 10px;
+
+      padding: 5px;
+
   }
-  
-  .HEADER .text-wrapper-3 {
-    color: #ffffff;
-    font-family: "Outfit-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    left: 49px;
-    letter-spacing: 0;
-    line-height: normal;
-    opacity: 0.5;
-    position: absolute;
-    text-align: center;
-    top: 0;
-    width: 100px;
+
+  .socials {
+
+      display: none;
+
   }
-  
-  .HEADER .frame {
-    align-items: flex-start;
-    background-color: #ffffff;
-    border-radius: 28px;
-    display: flex;
-    gap: 10px;
-    height: 35px;
-    left: 1171px;
-    padding: 8px 16px;
-    position: absolute;
-    top: 22px;
-    width: 94px;
+
+  .banner-text {
+
+      left: 50%;
+
+      text-align: center;
+
+      width: 80%;
+
   }
-  
-  .HEADER .text-wrapper-4 {
-    color: #4584ff;
-    font-family: "Outfit-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: normal;
-    margin-right: -8px;
-    margin-top: -1px;
-    position: relative;
-    text-align: center;
-    width: 70px;
+
+  .banner-text h1 {
+
+      font-size: 18px;
+
   }
-  
-  .HEADER .div-wrapper {
-    align-items: flex-start;
-    background-color: #ffffff;
-    border-radius: 28px;
-    display: flex;
-    gap: 10px;
-    height: 35px;
-    left: 1293px;
-    padding: 8px 16px;
-    position: absolute;
-    top: 22px;
-    width: 94px;
+
+  .banner-text p {
+
+      margin: 15px 0;
+
+      font-size: 11px;
+
   }
-  
-  .HEADER .text-wrapper-5 {
-    color: #ffffff;
-    font-family: "Plus Jakarta Sans-SemiBold", Helvetica;
-    font-size: 16px;
-    font-weight: 600;
-    left: 663px;
-    letter-spacing: 0;
-    line-height: normal;
-    opacity: 0.5;
-    position: absolute;
-    text-align: center;
-    top: 29px;
-    width: 127px;
+
+  .banner-text button {
+
+      font-size: 12px;
+
   }
-  
-  .HEADER .text-wrapper-6 {
-    color: #ffffff;
-    font-family: "Plus Jakarta Sans-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    left: 805px;
-    letter-spacing: 0;
-    line-height: normal;
-    opacity: 0.5;
-    position: absolute;
-    text-align: center;
-    top: 30px;
-    width: 170px;
-  }
-  
-  .HEADER .overlap-group-wrapper {
-    height: 52px;
-    left: 50px;
-    position: absolute;
-    top: 10px;
-    width: 164px;
-  }
-  
-  .HEADER .overlap-group {
-    height: 52px;
-    position: relative;
-    width: 166px;
-  }
-  
-  .HEADER .group-3 {
-    height: 32px;
-    left: 33px;
-    position: absolute;
-    top: 17px;
-    width: 133px;
-  }
-  
-  .HEADER .text-wrapper-7 {
-    color: #ffffff;
-    font-family: "Plus Jakarta Sans-SemiBold", Helvetica;
-    font-size: 32px;
-    font-weight: 600;
-    left: 0;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    text-align: center;
-    top: 0;
-    white-space: nowrap;
-    width: 131px;
-  }
-  
-  .HEADER .logo-shapes {
-    height: 52px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 51px;
-  }
-  
+
+}

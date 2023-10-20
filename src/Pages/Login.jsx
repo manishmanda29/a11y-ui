@@ -14,8 +14,9 @@ const BASE_URL=process.env.REACT_APP_BASE_URL
 export default function Login() {
     const postLoginData=(values, { setSubmitting })=>
     {
-        axios.post(process.env.REACT_APP_BASE_URL+'/api/auth/login',{...values}).then((data)=>
+        axios.post(process.env.REACT_APP_BASE_URL+'/api/auth/login',{...values}).then(({data})=>
         {
+            console.log(data)
             localStorage.setItem("access_token",data?.accessToken)
             toast.success("Success",{
                 position: toast.POSITION.BOTTOM_RIGHT,

@@ -9,19 +9,19 @@ import 'react-toastify/dist/ReactToastify.css'
 import {toast,ToastContainer} from 'react-toastify'
 import {Link} from 'react-router-dom'
 import YoutubeEmbed from "../components/YoutubeEmbed.jsx";
+import { useEffect ,useState} from "react";
 
 const BASE_URL=process.env.REACT_APP_BASE_URL
 
 export default function LearninVideos() {
-    const postLoginData=(values, { setSubmitting })=>
+
+    const [Link,setLink]=useState([])
+    const getLinks=()=>
     {
-        axios.post(process.env.REACT_APP_BASE_URL+'/api/auth/login',{...values}).then((data)=>
+        axios.get(process.env.REACT_APP_BASE_URL+'/api/get-learning-videos').then(({data})=>
         {
-            localStorage.setItem("access_token",data?.accessToken)
-            toast.success("Success",{
-                position: toast.POSITION.BOTTOM_RIGHT,
-                draggable: true
-            })
+            console.log(data.data)
+            setLink(data.data)
         }).catch((error)=>{
             toast.error(error.message, {
                 position: toast.POSITION.BOTTOM_RIGHT,
@@ -30,13 +30,24 @@ export default function LearninVideos() {
         })
 
     }
+
+    useEffect(()=>{
+getLinks()
+    },[])
     
     return (
         <div>
 
-        <div style={{display:'flex',alignItems:'center'}}>
+        <div style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
             <h1>Learning Videos</h1>
-           <YoutubeEmbed embedId="rokGy0huYEA" />
+            <div>
+                {
+                Link.length>0 ? Link.map((data)=>{
+                  return <YoutubeEmbed embedId={data.link} />
+                }):<div>No videos Found</div>
+            }
+            </div>
+           
         </div>
         </div>
     )
