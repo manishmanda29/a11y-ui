@@ -46,27 +46,43 @@ nav {
 
   cursor: pointer;
 
+  opacity:50%;
+
   font-weight: bold;
 
-  font-size: 18px;
+  font-size: 20px;
 
-  text-transform: uppercase;
+  text-transform: capitalized;
 
-  font-family: montserrat;
+  font-family: Plus Jakarta Sans;
 
   color: #fff;
 
-  padding: 5px 15px;
+  padding: 10px 15px;
 
 }
 
 .menu ul li a:hover{
 
-  background: rgb(0, 0, 20);
+  background: transparent;
+
+  opacity:100%;
+
+  text-decoration: underline;
+
+  text-decoration-thickness: 2px;
+
+  text-underline-offset: 7px;
 
 }
 
-.socials a {
+.container a {
+
+  display: flex;
+
+  justify-content:center;
+
+  align-items:center;
 
   text-decoration: none;
 
@@ -74,15 +90,111 @@ nav {
 
   background: white;
 
-  color:#4584FF;
+  font-family: 'Plus Jakarta Sans';font-size: 16px;
 
-  ;
+  color:#4584FF;
 
   padding: 5px 15px;
 
 }
 
+a.button {
+
+  cursor: pointer;
+
+  border: 0;
+
+  border-radius: 25px;
+
+  font-weight: 600;
+
+  margin: auto;
+
+  text-align:center;
+
+  line-height:100%;
+
+  vertical-align:middle;
+
+  position: absolute;
+
+  display:flex;
+
+  justify-content:center;
+
+  width: 100px;
+
+  padding: 0px;
+
+  transition: 0.4s;
+
+}  
+
+.reg {
+
+  color: #4584FF;
+
+  background-color: rgba(255, 255, 255, 1);
+
+  cursor: pointer;
+
+  border: 0;
+
+  border-radius: 25px;
+
+  font-weight: 600;
+
+  margin: 0 10px;
+
+  width: 100px;
+
+  padding: 10px 0;
+
+  transition: 0.4s;
+
+}
+
+
+
+.log {
+
+  color: #4584FF;
+
+  background-color: rgba(255, 255, 255, 1);
+
+  cursor: pointer;
+
+  border: 0;
+
+  border-radius: 25px;
+
+  font-weight: 600;
+
+  margin: 0 10px;
+
+  width: 100px;
+
+  padding: 10px 0;
+
+  transition: 0.4s;
+
+}
+
+
+
+button:hover {
+
+  color: white;
+
+  box-shadow: 0 0 20px transparent;
+
+  background-color: transparent;
+
+}
+
 .header {
+
+
   /* background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(homepage_SE_project.jpg); */
 
   -webkit-background-size: cover;
@@ -107,7 +219,7 @@ nav {
 
   transform: translate(-50%, -50%);
 
-  text-align: left;
+  text-align: center;
 
 }
 
@@ -117,31 +229,41 @@ nav {
 
   margin: 0;
 
+  text-align: center;
+
 }
 
 .banner-text p {
 
   margin: 15px 0 40px;
 
+  text-align: center;
+
 }
 
 .banner-text button {
 
+  cursor: pointer;
+
   background: white;
 
-  border: none;
+  border: 0;
 
   outline: none;
 
-  border-radius: 20px;
+  border-radius: 25px;
 
   color: #4584FF;
 
-  padding: 10px 30px;
+  text-align: center;
+
+  padding: 5px 100px;
 
   font-size: 20px;
 
-  font-family: montserrat;
+  transition: 0.4s;
+
+  font-family: Plus Jakarta Sans;
 
   margin-left: 1500px;
 
@@ -171,7 +293,7 @@ nav {
 
   }
 
-  .socials {
+  .container {
 
       margin-top: 25px;
 
@@ -190,6 +312,8 @@ nav {
   .banner-text h1 {
 
       font-size: 40px;
+
+      text-align: center;
 
   }
 
@@ -219,7 +343,7 @@ nav {
 
   }
 
-  .socials {
+  .container {
 
       display: none;
 
@@ -239,6 +363,8 @@ nav {
 
       font-size: 18px;
 
+      text-align: center;
+
   }
 
   .banner-text p {
@@ -247,11 +373,15 @@ nav {
 
       font-size: 11px;
 
+      text-align: center;
+
   }
 
   .banner-text button {
 
       font-size: 12px;
+
+      text-align: center;
 
   }
 

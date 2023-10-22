@@ -5,12 +5,13 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Button from '@mui/material/Button';
 import BlueLogo from '../images/BlueLogo.svg';
 import axios from 'axios'
+import Axios from '../axios.js'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast, ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import YoutubeEmbed from "../components/YoutubeEmbed.jsx";
 import { useEffect, useState } from "react";
-import {Header} from '../components/Header.jsx'
+import { Header } from '../components/Header.jsx'
 import './ContentPage.css'
 import CardTitle from "../components/Card.jsx";
 import { CircularProgressbar } from 'react-circular-progressbar';
@@ -22,41 +23,114 @@ const BASE_URL = process.env.REACT_APP_BASE_URL
 export default function ContentPage() {
 
     const [data, setData] = useState([])
-    const getLinks = () => {
-        axios.get(process.env.REACT_APP_BASE_URL + '/api/get-learning-videos').then(({ data }) => {
-            console.log(data.data)
-        }).catch((error) => {
-            toast.error(error.message, {
+    const [selected, setSelected] = useState('')
+    const [progressData, setProgressData] = useState({})
+    const [progress, setProgress] = useState(0)
+    const getData = () => {
+        axios.get(process.env.REACT_APP_BASE_URL + 'api/get-learning-content').then(({ data }) => {
+            console.log(data)
+            setSelected(data.topics[0])
+            setData(data)
+        }).catch(({ response }) => {
+            toast.error(response.data.message, {
                 position: toast.POSITION.BOTTOM_RIGHT,
                 draggable: true
             })
         })
 
     }
-    const sendCompletedTopic=()=>{
+    const sendCompletedTopic = () => {
+        Axios.post('api/set-learning-progress', { contentTitle: selected }).then(({ data }) => {
+            console.log(data)
+            getLearningProgress();
+        }).catch(({ response }) => {
+            console.log(response.data.message)
+            toast.error(response.data.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                draggable: true
+            })
+        })
+     
 
     }
+
+    const calculateProgressData = () => {
+        console.log(Object.keys(progressData).length ,"i am in this")
+        if (Object.keys(progressData).length > 0) {
+            console.log(progressData)
+            let total = progressData.allTopics.length
+            let remained = progressData.remainedTopics.length
+            console.log(total)
+            console.log(remained)
+
+            let avg = ((total - remained)/ total)*100;
+            setProgress(avg)
+
+
+        }
+
+    }
+
+
+    const getLearningProgress = () => {
+        Axios.get('api/get-learning-progress').then(({ data }) => {
+            console.log(data)
+            setProgressData({ ...data })
+        }).catch(({ response }) => {
+            console.log(response.data.message)
+            toast.error(response.data.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                draggable: true
+            })
+        })
+    }
+
+    const topicHandler = (e) => {
+        console.log(e.target.innerText)
+        setSelected(e.target.innerText)
+    }
+    useEffect(() => {
+        calculateProgressData()
+    }, [progressData])
+    useEffect(() => {
+        getData()
+        getLearningProgress()
+
+    }, [])
+    let content = data && data?.content && data?.content?.find((el) => el?.title === selected)
     return (
+
         <div>
-           <Header/>
-            <div style={{ display: 'flex',gap:'20px' }}>
-                <div style={{margin:10,display:'flex',flexDirection:'column',gap:5}} className='left-side'>
-                <CardTitle title={'Getting started'}/>
-                <CardTitle title={'heklp'}/>
-                <CardTitle title={'heklp'}/>
-                <CardTitle title={'heklp'}/>
-                <CardTitle title={'heklp'}/>
-                <CardTitle title={'heklp'}/>
-                <CardTitle title={'heklp'}/>
+            <Header />
+            <div style={{ display: 'flex', gap: '20px' }}>
+                <div style={{ margin: 10, display: 'flex', flexDirection: 'column', gap: 5 }} className='left-side'>
+                    {
+                        data?.topics && data.topics.map((topic) => {
+                            return <CardTitle style={{ cursor: 'pointer' }} title={topic} onClick={topicHandler} />
+
+                        })
+                    }
                 </div>
-                <div  style={{flex:3}}className='right-side'>
-                <CircularProgressbar  className={'progress-bar'} value={50} text={`50%`}/>
-                <div className="content">
-                    <h2>Title</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
-                <button style={{alignSelf:'flex-end',width: 96, height:38 ,margin:10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10,color:'white',cursor:'pointer'}} onClick={sendCompletedTopic}>Complete </button>
-                </div>
+                <div style={{ flex: 3 }} className='right-side'>
+                    <CircularProgressbar className={'progress-bar'} value={progress} text={`${progress}%`} />
+                    <div className="content">
+                        {
+                            content ?
+                                <>
+                                    <h2>{content?.title}</h2>
+                                    <p>{content?.description}</p>
+                                </> : <h5>Content Not found</h5>
+                        }
+
+                    </div>
+                    {progressData?.completedTopics && progressData?.completedTopics.find((data)=> data===selected)?
+                     <button  style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }}>Completed</button>:
+                     <button  style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }} onClick={sendCompletedTopic}>Complete </button>
+                 
+                    }
+                        </div>
+                   
+                <ToastContainer />
 
             </div>
         </div>

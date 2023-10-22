@@ -15,7 +15,7 @@ export default function Login() {
     let navigate = useNavigate();
     const postLoginData=(values, { setSubmitting })=>
     {
-        axios.post(process.env.REACT_APP_BASE_URL+'/api/auth/login',{...values}).then(({data})=>
+        axios.post(process.env.REACT_APP_BASE_URL+'api/auth/login',{...values}).then(({data})=>
         {
             console.log(data)
             localStorage.setItem("access_token",data?.accessToken)
@@ -29,7 +29,7 @@ export default function Login() {
               
 
         }).catch((error)=>{
-            toast.error(error.message, {
+            toast.error(error.response.data.message, {
                 position: toast.POSITION.BOTTOM_RIGHT,
                 draggable: true
               })

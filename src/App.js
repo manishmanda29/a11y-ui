@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import { Header } from './components/Header';
 import ContentPage from './Pages/ContentPage';
 import ProtectedRoutes from './ProtectedRoutes'
+import CourseCompletion from './Pages/CourseCompletion';
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
       <Route exact path='/notfound' element={<NotFound/>}/>
       <Route exact path='/home' element={<Home/>}/>
       <Route exact path='/learn' element={<ContentPage/>}></Route>
+      <Route exact path="/certificate" element={<CourseCompletion/>}></Route>
       <Route path="*" element={<Navigate to="/notfound"/>} />
      </Routes>
      <Footer/>

@@ -1,44 +1,58 @@
 import React from "react";
 import "./Header.css";
-import {Link}  from'react-router-dom';
+import {Link,useNavigate}  from'react-router-dom';
 
 export const Header = () => {
+ let navigate=useNavigate()
+  let token=localStorage.getItem('access_token')
+  const handleLogout=()=>{
+    localStorage.clear()
+    navigate('/login')
+  }
   return (
     <div class="header">
 
-      <nav>
+    <nav>
 
         <div class="logo">11y.ed</div>
 
         <div class="menu">
 
-          <ul>
+            <ul>
 
-            <li><a href="#">Home</a></li>
+                 <li><Link to={'/home'}>Home</Link></li>
+                 <li>  <Link to={'/learn'}>Learn </Link> </li>
+                  <li><Link to={'/'}> Games</Link></li>
 
-            <li><a href="#">Learn</a></li>
+                <li><Link to={'/'}> Quizzes</Link></li>
 
-            <li><a href="#">Games</a></li>
+               <li><Link>Leaderboard</Link></li>
+               <li><Link to={'/learning-videos'}>Learning videos</Link></li>
 
-            <li><a href="#">Quizzes</a></li>
+                {/* <Link to={'/'}> <li><a href="#">Accessibility Testing</a></li></Link> */}
 
-            <li><a href="#">Leaderboard</a></li>
-
-            <li><a href="#">Accessibility Testing</a></li>
-
-          </ul>
-
-        </div>
-
-        <div class="socials">
-
-          <li><a><Link to={'/login'}>Login</Link></a></li>
-
-          <li><a><Link to={'/sign-up'}>Register</Link></a></li>
+            </ul>
 
         </div>
 
-      </nav>
-    </div>
+        <div style={{display:'flex',gap:20}}class="container">
+          {!token?
+          <>
+           <Link to={'/sign-up'}><button class="log">Register</button></Link>
+
+           <Link to={'/login'}><button class="reg">Login</button></Link>
+           </>: <button class="reg" onClick={handleLogout}>Logout</button>
+          }
+        </div>
+
+    </nav>
+
+    {/* <div class="banner-text">
+
+        <button style={{width:150,height:50}}type="button">Get Started</button>
+
+    </div>         */}
+
+</div>
   )
 };
