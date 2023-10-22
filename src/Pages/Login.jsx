@@ -7,11 +7,12 @@ import BlueLogo from '../images/BlueLogo.svg';
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css'
 import {toast,ToastContainer} from 'react-toastify'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 
 const BASE_URL=process.env.REACT_APP_BASE_URL
 
 export default function Login() {
+    let navigate = useNavigate();
     const postLoginData=(values, { setSubmitting })=>
     {
         axios.post(process.env.REACT_APP_BASE_URL+'/api/auth/login',{...values}).then(({data})=>
@@ -22,6 +23,11 @@ export default function Login() {
                 position: toast.POSITION.BOTTOM_RIGHT,
                 draggable: true
             })
+            setTimeout(()=>{
+                navigate('/home')
+               },1000) 
+              
+
         }).catch((error)=>{
             toast.error(error.message, {
                 position: toast.POSITION.BOTTOM_RIGHT,
@@ -64,7 +70,7 @@ export default function Login() {
                             </Form>
                         )}
                     </Formik>
-                    <div><div style={{width: '100%', height: '100%', color: 'black', fontSize: 16, fontFamily: 'Plus Jakarta Sans', fontWeight: '400', wordWrap: 'break-word'}}>Need an account?<Link style={{width: '100%', height: '100%', color: '#4895EF', fontSize: 16, fontFamily: 'Plus Jakarta Sans', fontWeight: '300', wordWrap: 'break-word',cursor:'pointer',alignSelf:'center',marginTop:50}} to={'/'}>Sign up</Link></div></div>
+                    <div><div style={{width: '100%', height: '100%', color: 'black', fontSize: 16, fontFamily: 'Plus Jakarta Sans', fontWeight: '400', wordWrap: 'break-word'}}>Need an account?<Link style={{width: '100%', height: '100%', color: '#4895EF', fontSize: 16, fontFamily: 'Plus Jakarta Sans', fontWeight: '300', wordWrap: 'break-word',cursor:'pointer',alignSelf:'center',marginTop:50}} to={'/sign-up'}>Sign up</Link></div></div>
                     <ToastContainer /> 
                 </div>
             </div>

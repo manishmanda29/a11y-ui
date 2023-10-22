@@ -100,7 +100,7 @@ export const SignUp = () => {
                                     <Field className="field" type="password" name="confirmpassword" placeholder='Confirm Password' />
                                     <ErrorMessage name="confirmpassword">{msg => <div style={{color:'red', fontSize:14}}>{msg}</div>}</ErrorMessage>
                                     <button  type='submit' style={{ width: 198, height: 71, alignSelf: 'center', background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white',cursor:'pointer' }}>Sign Up </button>
-                                    <div style={{color: 'black', fontSize: 16, fontFamily: 'Plus Jakarta Sans', fontWeight: '400', wordWrap: 'break-word', alignSelf: 'center', marginTop: 20}}>Already an account exists?<Link style={{width: '100%', height: '100%', color: '#4895EF', fontSize: 16, fontFamily: 'Plus Jakarta Sans', fontWeight: '300', wordWrap: 'break-word',cursor:'pointer'}} to ={'/login'}>Login</Link></div> 
+                                    <div style={{color: 'black', fontSize: 16, fontFamily: 'Plus Jakarta Sans', fontWeight: '400', wordWrap: 'break-word', alignSelf: 'center', marginTop: 20}}>Already an account exists?<Link style={{width: '100%', color: '#4895EF', fontSize: 16, fontFamily: 'Plus Jakarta Sans', fontWeight: '300', wordWrap: 'break-word',cursor:'pointer'}} to ={'/login'}>Login</Link></div> 
                                 </Form>                             
                             )}
                         </Formik>

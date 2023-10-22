@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import {Link}  from'react-router-dom';
 
 export const Header = () => {
   return (
@@ -31,20 +32,13 @@ export const Header = () => {
 
         <div class="socials">
 
-          <li><a href="#">Login</a></li>
+          <li><a><Link to={'/login'}>Login</Link></a></li>
 
-          <li><a href="#">Register</a></li>
+          <li><a><Link to={'/sign-up'}>Register</Link></a></li>
 
         </div>
 
       </nav>
-
-      <div class="banner-text">
-
-        <button type="button">Get Started</button>
-
-      </div>
-
     </div>
   )
 };

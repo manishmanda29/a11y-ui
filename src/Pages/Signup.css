@@ -7,20 +7,13 @@
     background-image: url(../images/SignUp.png);
     
   }
-  
-  .desktop .group-wrapper {
+
+  .desktop .group {
+    position: relative;
+    top: 50px;
+    width: 602px;
     border: 1px solid;
     border-color: #ffffff;
-    height: 1024px;
-    width: 1395px;
-  }
-  
-  .desktop .group {
-    height: 770px;
-    left: 400px;
-    position: relative;
-    top: 130px;
-    width: 602px;
   }
   
   .desktop .overlap {

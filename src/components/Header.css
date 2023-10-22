@@ -83,9 +83,6 @@ nav {
 }
 
 .header {
-
-  height: 100vh;
-
   /* background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(homepage_SE_project.jpg); */
 
   -webkit-background-size: cover;
