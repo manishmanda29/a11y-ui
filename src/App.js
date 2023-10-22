@@ -10,6 +10,7 @@ import Home  from './Pages/Home';
 import Footer from './components/Footer';
 import { Header } from './components/Header';
 import ContentPage from './Pages/ContentPage';
+import ProtectedRoutes from './ProtectedRoutes'
 function App() {
   return (
     <>
@@ -17,7 +18,7 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route exact path='/sign-up' element={<SignUp/>}/>
       <Route exact  path='/login' element={<Login/>}/>
-      <Route exact path='/learning-videos' element={<LearningVideos/>}/>
+      <Route exact path='/learning-videos' element={<ProtectedRoutes><LearningVideos/></ProtectedRoutes>}/>
       <Route exact path='/notfound' element={<NotFound/>}/>
       <Route exact path='/home' element={<Home/>}/>
       <Route exact path='/learn' element={<ContentPage/>}></Route>

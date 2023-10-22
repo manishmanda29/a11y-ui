@@ -1,3 +1,5 @@
+import {Routes, Route ,Navigate} from 'react-router-dom'
+
 const ProtectedRoutes = ({children }) => {
     
     if (!localStorage.getItem('access_token')) {
@@ -6,3 +8,5 @@ const ProtectedRoutes = ({children }) => {
   
     return children;
   };
+
+  export default ProtectedRoutes;
