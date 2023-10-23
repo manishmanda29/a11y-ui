@@ -22,10 +22,13 @@ import React from "react";
 import Bg from '../images/certificatebg.png'
 import jwt_decode from "jwt-decode";
  
-var token = localStorage.getItem('access_token');
-console.log(token)
-var decoded=jwt_decode(token)
-console.log(decoded)
+var token = localStorage?.getItem('access_token');
+if(token)
+{
+    var decoded=jwt_decode(token)
+    console.log(decoded)
+    
+}
 
 
 
