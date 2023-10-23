@@ -29,9 +29,6 @@ if(token)
     console.log(decoded)
     
 }
-
-
-
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
 export default function CourseCompletion() {
@@ -57,7 +54,7 @@ export default function CourseCompletion() {
                     <h2>
                     Thank you for completing course
                     </h2>
-                    <button onClick={handleDownload}>download certificate</button>
+                    <button onClick={handleDownload}>Download certificate</button>
                     <img src={Bg}></img>
 
                 </div>

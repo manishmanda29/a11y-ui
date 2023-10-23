@@ -64,7 +64,7 @@ export default function ContentPage() {
             console.log(remained)
 
             let avg = ((total - remained)/ total)*100;
-            setProgress(avg)
+            setProgress(Math.trunc(avg))
 
 
         }
@@ -112,7 +112,12 @@ export default function ContentPage() {
                     }
                 </div>
                 <div style={{ flex: 3 }} className='right-side'>
+                    <div style={{display:'flex',justifyContent:'flex-end',alignItems:'center'}}>
+                    {
+                        progressData?.remainedTopics && progressData?.remainedTopics.length==0 &&<Link to={'/certificate'}><button  style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }}>Certificate</button></Link>
+                    }
                     <CircularProgressbar className={'progress-bar'} value={progress} text={`${progress}%`} />
+                    </div>
                     <div className="content">
                         {
                             content ?
@@ -126,7 +131,6 @@ export default function ContentPage() {
                     {progressData?.completedTopics && progressData?.completedTopics.find((data)=> data===selected)?
                      <button  style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }}>Completed</button>:
                      <button  style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }} onClick={sendCompletedTopic}>Complete </button>
-                 
                     }
                         </div>
                    

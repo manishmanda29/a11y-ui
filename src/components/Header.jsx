@@ -1,6 +1,7 @@
 import React from "react";
 import "./Header.css";
 import {Link,useNavigate}  from'react-router-dom';
+import whiteLogo from '../images/whiteLogo.png'
 
 export const Header = () => {
  let navigate=useNavigate()
@@ -14,7 +15,7 @@ export const Header = () => {
 
     <nav>
 
-        <div class="logo">11y.ed</div>
+        <img src={whiteLogo}/>
 
         <div class="menu">
 
