@@ -1,13 +1,7 @@
-import Footer from "../components/Footer.jsx";
-import LoginImage from '../images/LoginImage.jpg';
 import './Login.css'
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import Button from '@mui/material/Button';
-import BlueLogo from '../images/BlueLogo.svg';
 import Axios from '../axios.js'
 import 'react-toastify/dist/ReactToastify.css'
-import { toast, ToastContainer } from 'react-toastify'
-import { Link } from 'react-router-dom'
+import { toast} from 'react-toastify'
 import YoutubeEmbed from "../components/YoutubeEmbed.jsx";
 import { useEffect, useState } from "react";
 import {Header} from '../components/Header.jsx'

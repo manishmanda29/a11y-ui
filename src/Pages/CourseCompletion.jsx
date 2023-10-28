@@ -1,35 +1,14 @@
-import Footer from "../components/Footer.jsx";
-import LoginImage from '../images/LoginImage.jpg';
+import React from "react";
 import './Login.css'
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import Button from '@mui/material/Button';
-import BlueLogo from '../images/BlueLogo.svg';
-import axios from 'axios'
-import Axios from '../axios.js'
-import 'react-toastify/dist/ReactToastify.css'
-import { toast, ToastContainer } from 'react-toastify'
-import { Link } from 'react-router-dom'
-import YoutubeEmbed from "../components/YoutubeEmbed.jsx";
-import { useEffect, useState } from "react";
-import { Header } from '../components/Header.jsx'
 import './ContentPage.css'
-import CardTitle from "../components/Card.jsx";
-import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-toastify/dist/ReactToastify.css'
+import { Header } from '../components/Header.jsx'
 import 'react-circular-progressbar/dist/styles.css';
 import { exportComponentAsPNG } from "react-component-export-image";
 import image from '../images/image.jpg'
-import React from "react";
 import Bg from '../images/certificatebg.png'
 import jwt_decode from "jwt-decode";
  
-var token = localStorage?.getItem('access_token');
-if(token)
-{
-    var decoded=jwt_decode(token)
-    console.log(decoded)
-    
-}
-const BASE_URL = process.env.REACT_APP_BASE_URL
 
 export default function CourseCompletion() {
     let certificateWrapper = React.createRef();
@@ -39,8 +18,9 @@ export default function CourseCompletion() {
         exportComponentAsPNG(certificateWrapper, {
             html2CanvasOptions: { backgroundColor: null }
         });
-    } 
-
+    }
+    const token = localStorage?.getItem('access_token');
+    let decoded_token=token?jwt_decode(token):{}
     return (
 
         <div>
@@ -66,7 +46,7 @@ export default function CourseCompletion() {
                             top: 130,
                         }
                         }
-                        >{decoded.username}</p>
+                        >{decoded_token?.username}</p>
                         <img style={{ width: 400, height: 300 }} src={image} alt="Certificate" />
                     </div>
                 </div>

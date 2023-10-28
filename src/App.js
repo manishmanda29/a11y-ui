@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import Login from './Pages/Login'
 import {SignUp} from './Pages/SignUp'
 import './App.css';
@@ -6,9 +5,7 @@ import {Routes, Route ,Navigate} from 'react-router-dom'
 import LearningVideos from './Pages/LearningVideos';
 import NotFound from './Pages/NotFound';
 import Home  from './Pages/Home';
-
 import Footer from './components/Footer';
-import { Header } from './components/Header';
 import ContentPage from './Pages/ContentPage';
 import ProtectedRoutes from './ProtectedRoutes'
 import CourseCompletion from './Pages/CourseCompletion';
