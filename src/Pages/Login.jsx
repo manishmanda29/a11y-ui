@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import {toast,ToastContainer} from 'react-toastify'
 import {Link,useNavigate} from 'react-router-dom'
 
-const BASE_URL=process.env.REACT_APP_BASE_URL
 
 export default function Login() {
     let navigate = useNavigate();

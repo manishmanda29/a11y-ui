@@ -55,17 +55,11 @@ export default function ContentPage() {
     }
 
     const calculateProgressData = () => {
-        console.log(Object.keys(progressData).length ,"i am in this")
         if (Object.keys(progressData).length > 0) {
-            console.log(progressData)
             let total = progressData.allTopics.length
             let remained = progressData.remainedTopics.length
-            console.log(total)
-            console.log(remained)
-
             let avg = ((total - remained)/ total)*100;
             setProgress(Math.trunc(avg))
-
 
         }
 
@@ -74,7 +68,6 @@ export default function ContentPage() {
 
     const getLearningProgress = () => {
         Axios.get('api/get-learning-progress').then(({ data }) => {
-            console.log(data)
             setProgressData({ ...data })
         }).catch(({ response }) => {
             console.log(response.data.message)
@@ -86,7 +79,6 @@ export default function ContentPage() {
     }
 
     const topicHandler = (e) => {
-        console.log(e.target.innerText)
         setSelected(e.target.innerText)
     }
     useEffect(() => {
