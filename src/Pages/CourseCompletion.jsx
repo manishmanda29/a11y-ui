@@ -13,7 +13,7 @@ import jwt_decode from "jwt-decode";
 export default function CourseCompletion() {
     let certificateWrapper = React.createRef();
 
-    const handleDownload = (e) => {
+    const handleDownload = (e) =>  {
         e.preventDefault();
         exportComponentAsPNG(certificateWrapper, {
             html2CanvasOptions: { backgroundColor: null }
