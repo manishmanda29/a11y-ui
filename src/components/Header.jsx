@@ -30,8 +30,7 @@ export const Header = () => {
                <li><Link>Leaderboard</Link></li>
                <li><Link to={'/learning-videos'}>Learning videos</Link></li>
 
-                {/* <Link to={'/'}> <li><a href="#">Accessibility Testing</a></li></Link> */}
-
+                <li><Link to={'/accessibility-testing'}>Accessibility Testing</Link></li>
             </ul>
 
         </div>
