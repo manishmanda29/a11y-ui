@@ -16,21 +16,25 @@ import './ContentPage.css'
 import CardTitle from "../components/Card.jsx";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import Input from '@mui/joy/Input';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
 export default function ContentPage() {
 
     const [data, setData] = useState([])
-    const [selected, setSelected] = useState('')
+    const [content, setContent] = useState([])
+    const [selected, setSelected] = useState()
     const [progressData, setProgressData] = useState({})
-    const [progress, setProgress] = useState(0)
+    const [progress, setProgress] = useState(0);
+    const [search,setSearch]=useState('');
+    const [keyword,setKeywords]=useState([])
     const getData = () => {
         axios.get(process.env.REACT_APP_BASE_URL + 'api/get-learning-content').then(({ data }) => {
-            console.log(data)
-            setSelected(data.topics[0])
             setData(data)
+            getContent()
         }).catch(({ response }) => {
             toast.error(response.data.message, {
                 position: toast.POSITION.BOTTOM_RIGHT,
@@ -41,29 +45,38 @@ export default function ContentPage() {
     }
     const sendCompletedTopic = () => {
         Axios.post('api/set-learning-progress', { contentTitle: selected }).then(({ data }) => {
-            console.log(data)
             getLearningProgress();
         }).catch(({ response }) => {
-            console.log(response.data.message)
             toast.error(response.data.message, {
                 position: toast.POSITION.BOTTOM_RIGHT,
                 draggable: true
             })
         })
-     
+
+
+    }
+
+    const getContent = () => {
+        axios.get(process.env.REACT_APP_BASE_URL + 'api/get-learning-content?id=' + selected).then(({ data }) => {
+            setContent(data)
+        }).catch(({ response }) => {
+            toast.error(response.data.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                draggable: true
+            })
+        })
 
     }
 
     const calculateProgressData = () => {
-        console.log(Object.keys(progressData).length ,"i am in this")
         if (Object.keys(progressData).length > 0) {
-            console.log(progressData)
+            console.log(progressData, "progressDATA")
             let total = progressData.allTopics.length
-            let remained = progressData.remainedTopics.length
+            let remained = progressData.completedTopics.length
             console.log(total)
             console.log(remained)
 
-            let avg = ((total - remained)/ total)*100;
+            let avg = ((remained) / total) * 100;
             setProgress(Math.trunc(avg))
 
 
@@ -86,9 +99,13 @@ export default function ContentPage() {
     }
 
     const topicHandler = (e) => {
-        console.log(e.target.innerText)
-        setSelected(e.target.innerText)
+        console.log(e.currentTarget.id)
+        setSelected(e.currentTarget.id)
     }
+
+    useEffect(() => {
+        getContent()
+    }, [selected])
     useEffect(() => {
         calculateProgressData()
     }, [progressData])
@@ -97,26 +114,91 @@ export default function ContentPage() {
         getLearningProgress()
 
     }, [])
-    let content = data && data?.content && data?.content?.find((el) => el?.title === selected)
+
+    useEffect(()=>{
+        if(data.length>0)
+        {
+            setSelected(data[0]?.id)
+        }
+
+
+    },[data])
+
+    const handleSubmit=(e)=>{
+        Axios.get('api/get-learning-content?search='+search).then(({ data }) => {
+            if(Array.isArray(data))
+            setData(data)
+        else
+        setData([])
+        }).catch(({ response }) => {
+            console.log(response.data.message)
+            toast.error(response.data.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                draggable: true
+            })
+        })
+
+
+    }
+
+    useEffect(()=>{
+     handleSubmit()
+        
+    },[search])
+
+    const getRecommendations=()=>{
+        Axios.get('/api/get-search-recommendations').then(({ data }) => {
+            setKeywords(data)
+
+        }).catch(({ response }) => {
+            console.log(response.data.message)
+            toast.error(response.data.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                draggable: true
+            })
+        })
+
+    }
+    // let content = data && data?.content && data?.content?.find((el) => el?.title === selected)
     return (
 
         <div>
             <Header />
             <div style={{ display: 'flex', gap: '20px' }}>
                 <div style={{ margin: 10, display: 'flex', flexDirection: 'column', gap: 5 }} className='left-side'>
-                    {
-                        data?.topics && data.topics.map((topic) => {
-                            return <CardTitle style={{ cursor: 'pointer' }} title={topic} onClick={topicHandler} />
+                <form style={{margin:10}}onSubmit={handleSubmit} id="demo">
+                    <FormControl>
+                        <FormLabel
+                            sx={(theme) => ({
+                                '--FormLabel-color': theme.vars.palette.primary.plainColor,
+                            })}
+                        >
+                        </FormLabel>
+                        <Input
+                            sx={{ '--Input-decoratorChildHeight': '45px' }}
+                            placeholder="Search"
+                            type="text"
+                            value={search}
+                            required
+                            onChange={(event) =>
+                                setSearch(event.target.value)
+                            }          onFocus={()=>getRecommendations()}></Input>
+                    </FormControl>
+                    </form>
+                    <div>
+                        {
+                            data.length>0 ? data?.map((topic) => {
+                                return (<CardTitle id={topic?.id} style={{ cursor: 'pointer' ,margin:10}} title={topic?.title} onClick={topicHandler} completedTopic={progressData?.completedTopics && progressData?.completedTopics.find((data) => parseInt(data) === parseInt(topic.id))} />)
 
-                        })
-                    }
-                </div>
+                            }):<div>No Results Found</div>
+                        }
+                    </div></div>
                 <div style={{ flex: 3 }} className='right-side'>
-                    <div style={{display:'flex',justifyContent:'flex-end',alignItems:'center'}}>
-                    {
-                        progressData?.remainedTopics && progressData?.remainedTopics.length==0 &&<Link to={'/certificate'}><button  style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }}>Certificate</button></Link>
-                    }
-                    <CircularProgressbar className={'progress-bar'} value={progress} text={`${progress}%`} />
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                        {
+                            progressData?.remainedTopics && progressData?.remainedTopics.length == 0 && <Link to={'/certificate'}><button style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }}>Certificate</button></Link>
+                        }
+                        <CircularProgressbar className={'progress-bar'} value={progress} text={`${progress}%`} />
                     </div>
                     <div className="content">
                         {
@@ -128,12 +210,12 @@ export default function ContentPage() {
                         }
 
                     </div>
-                    {progressData?.completedTopics && progressData?.completedTopics.find((data)=> data===selected)?
-                     <button  style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }}>Completed</button>:
-                     <button  style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }} onClick={sendCompletedTopic}>Complete </button>
+                    {progressData?.completedTopics && progressData?.completedTopics.find((data) => data === selected) ?
+                        <button style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }}>Completed</button> :
+                        <button style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }} onClick={sendCompletedTopic}>Complete </button>
                     }
-                        </div>
-                   
+                </div>
+
                 <ToastContainer />
 
             </div>

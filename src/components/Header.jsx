@@ -23,7 +23,7 @@ export const Header = () => {
 
                  <li><Link to={'/home'}>Home</Link></li>
                  <li>  <Link to={'/learn'}>Learn </Link> </li>
-                  <li><Link to={'/'}> Games</Link></li>
+                  <li><Link to={'/hang-man'}> Games</Link></li>
 
                 <li><Link to={'/'}> Quizzes</Link></li>
 

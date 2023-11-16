@@ -12,7 +12,7 @@ export const SignUp = () => {
     const register=(values, { setSubmitting }) => {
         console.log("i am hereee")
 
-        axios.post(process.env.REACT_APP_BASE_URL+'/api/auth/register',{email:values.email,password:values.password,username:values.username}).then((data)=>
+        axios.post(process.env.REACT_APP_BASE_URL+'api/auth/register',{email:values.email,password:values.password,username:values.username}).then((data)=>
         {
             toast.success("Successfull Registered",{
                 position: toast.POSITION.BOTTOM_RIGHT,

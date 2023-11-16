@@ -1,0 +1,55 @@
+var ENGLISH_WORDS = [
+    { word: "accessibility", clue: "Designing websites for everyone." },
+    { word: "keyboard", clue: "Input device for accessibility." },
+    { word: "screenreader", clue: "Helps visually impaired users." },
+    { word: "alttext", clue: "Describes images for screen readers." },
+    { word: "usability", clue: "Enhancing user experience." },
+    { word: "contrast", clue: "Difference in color for readability." },
+    { word: "semantics", clue: "Meaningful HTML tags." },
+    { word: "wcag", clue: "Web Content Accessibility Guidelines." },
+    { word: "inclusivity", clue: "Including all users." },
+    { word: "aria", clue: "Accessible Rich Internet Applications." },
+    { word: "focus", clue: "Keyboard navigation target." },
+    { word: "mobile", clue: "Accessibility for small screens." },
+    { word: "texttospeech", clue: "Audio representation of text." },
+    { word: "voiceover", clue: "Apple's screen reader." },
+    { word: "braille", clue: "Tactile writing system." },
+    { word: "captioning", clue: "Subtitles for videos." },
+    { word: "keyboardtrap", clue: "Accessibility navigation issue." },
+    { word: "usabilitytesting", clue: "User experience evaluation." },
+    { word: "colorcontrast", clue: "Readable color combinations." },
+    { word: "focusindicator", clue: "Highlighting focused elements." },
+    { word: "textresizer", clue: "Adjustable font size." },
+    { word: "readability", clue: "Clear and understandable text." },
+    { word: "tabindex", clue: "Keyboard navigation order." },
+    { word: "auditorycues", clue: "Sound feedback for interaction." },
+    { word: "webdevelopment", clue: "Creating accessible websites." },
+    { word: "linktext", clue: "Descriptive anchor text." },
+    { word: "semanticmarkup", clue: "Meaningful HTML structure." },
+    { word: "voicecommands", clue: "Speech-based interaction." },
+    { word: "accessibleforms", clue: "User-friendly data input." },
+    { word: "altattributes", clue: "Image descriptions." },
+    { word: "keyboardshortcuts", clue: "Efficient navigation." },
+    { word: "mobilefriendly", clue: "Optimized for smartphones." },
+    { word: "usabilityguidelines", clue: "Best practices for UX." },
+    { word: "highcontrast", clue: "Sharp color differences." },
+    { word: "colorblind", clue: "Visual impairment condition." },
+    { word: "webaccessibility", clue: "Inclusive web design." },
+    { word: "semanticheadings", clue: "Structured content." },
+    { word: "closedcaptions", clue: "Textual video descriptions." },
+    { word: "assistivetechnology", clue: "Accessibility tools." },
+    { word: "focusmanagement", clue: "Control of element focus." },
+    { word: "keyboardaccessibility", clue: "Navigating without a mouse." },
+    { word: "cognitivedisabilities", clue: "Mental challenges." },
+    { word: "accessibilityaudit", clue: "Evaluation of web accessibility." },
+    { word: "webstandards", clue: "Best practices for web development." },
+    { word: "accessibilityplugin", clue: "Enhancing web accessibility." },
+  ];  
+  function randomWord() {
+    return ENGLISH_WORDS[Math.floor(Math.random() * ENGLISH_WORDS.length)];
+  }
+
+
+  
+  export { randomWord };
+  

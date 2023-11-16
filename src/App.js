@@ -13,6 +13,7 @@ import ContentPage from './Pages/ContentPage';
 import ProtectedRoutes from './ProtectedRoutes'
 import CourseCompletion from './Pages/CourseCompletion';
 import Accessibility from './Pages/Accessibility';
+import HangMan from './Pages/HangMan'
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
       <Route exact path='/learn' element={<ContentPage/>}></Route>
       <Route exact path="/certificate" element={<CourseCompletion/>}></Route>
       <Route path="/accessibility-testing" element={<Accessibility/>} />
+      <Route exact path="/hang-man" element={<HangMan/>} />
       <Route path="*" element={<Navigate to="/notfound"/>} />
      </Routes>
      <Footer/>
