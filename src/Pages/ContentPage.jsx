@@ -19,6 +19,9 @@ import 'react-circular-progressbar/dist/styles.css';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import { useRef } from "react";
+import { compareRef, stringify } from "react-ref-compare";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -30,7 +33,14 @@ export default function ContentPage() {
     const [progressData, setProgressData] = useState({})
     const [progress, setProgress] = useState(0);
     const [search,setSearch]=useState('');
-    const [keyword,setKeywords]=useState([])
+    const [keyword,setKeywords]=useState([]);
+    const [open,setOpen]=useState(false);
+   let inputRef = useRef();
+    document.body.addEventListener('click',(e)=>{
+        if (inputRef.current && !inputRef.current.contains(e.target)) {
+            setOpen(false);
+          }
+    })
     const getData = () => {
         axios.get(process.env.REACT_APP_BASE_URL + 'api/get-learning-content').then(({ data }) => {
             setData(data)
@@ -142,13 +152,24 @@ export default function ContentPage() {
     }
 
     useEffect(()=>{
+    if(search.length>0)
+    {
+        setOpen(false)
+    }
      handleSubmit()
         
     },[search])
 
+    useEffect(()=>{
+        console.log(keyword)
+
+    },[keyword])
+
     const getRecommendations=()=>{
+        setOpen(true)
         Axios.get('/api/get-search-recommendations').then(({ data }) => {
-            setKeywords(data)
+            console.log("data",data?.recommendations)
+            setKeywords(data?.recommendations)
 
         }).catch(({ response }) => {
             console.log(response.data.message)
@@ -159,6 +180,10 @@ export default function ContentPage() {
         })
 
     }
+    const handleItemClick=(e)=>{
+        console.log(e.currentTarget.id)
+        setSelected(e.currentTarget.id)
+    }
     // let content = data && data?.content && data?.content?.find((el) => el?.title === selected)
     return (
 
@@ -167,7 +192,7 @@ export default function ContentPage() {
             <div style={{ display: 'flex', gap: '20px' }}>
                 <div style={{ margin: 10, display: 'flex', flexDirection: 'column', gap: 5 }} className='left-side'>
                 <form style={{margin:10}}onSubmit={handleSubmit} id="demo">
-                    <FormControl>
+                    <FormControl  ref={inputRef}>
                         <FormLabel
                             sx={(theme) => ({
                                 '--FormLabel-color': theme.vars.palette.primary.plainColor,
@@ -184,10 +209,24 @@ export default function ContentPage() {
                                 setSearch(event.target.value)
                             }          onFocus={()=>getRecommendations()}></Input>
                     </FormControl>
+
+                    {open && keyword.length > 0 &&
+                    <div style={{width: '22%', height: '33%', background: 'white', position:'fixed',borderTopLeftRadius: 20, borderTopRightRadius: 20, border: '1px #D9D9D9 solid'}}>
+                    <ul>
+                    {keyword?.map((data)=>{
+                        return(
+                        <li class={'list'}id={data.id}onClick={handleItemClick}>
+                        <TrendingUpIcon/>
+                        <span>{data.title}</span>
+                        </li>)
+                    })}
+                    </ul>
+                    </div>
+}
                     </form>
                     <div>
                         {
-                            data.length>0 ? data?.map((topic) => {
+                            data?.length>0 ?  data && data?.map((topic) => {
                                 return (<CardTitle id={topic?.id} style={{ cursor: 'pointer' ,margin:10}} title={topic?.title} onClick={topicHandler} completedTopic={progressData?.completedTopics && progressData?.completedTopics.find((data) => parseInt(data) === parseInt(topic.id))} />)
 
                             }):<div>No Results Found</div>

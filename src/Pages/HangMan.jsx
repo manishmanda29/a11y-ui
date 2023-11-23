@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { randomWord } from '../wordList';
 
 import "./Hangman.css";
+import { quiz } from '../GameQuiz';
 
 import img0 from "../images/0.jpg";
 import img1 from "../images/1.jpg";
@@ -10,6 +11,11 @@ import img3 from "../images/3.jpg";
 import img4 from "../images/4.jpg";
 import img5 from "../images/5.jpg";
 import img6 from "../images/6.jpg";
+import Quiz from 'react-quiz-component';
+import Axios from "../axios";
+import { toast, ToastContainer } from 'react-toastify';
+import {Link,useNavigate} from 'react-router-dom';
+import { Header } from "../components/Header";
 
 class Hangman extends Component {
   /** by default, allow 6 guesses and use provided gallows images. */
@@ -24,12 +30,16 @@ class Hangman extends Component {
     this.state = { 
       nWrong: 0, 
       guessed: new Set(), 
+      score:0,
+      submitted:false,
       // answer: "apple"
       answer: randomWord(),
     };
 
     this.handleGuess = this.handleGuess.bind(this);
     this.resetGame = this.resetGame.bind(this);
+    this.questionSubmit=this.questionSubmit.bind(this);
+    this.onCompleteGame=this.onCompleteGame.bind(this);
   }
 
   // reset the game and put things in default
@@ -52,6 +62,13 @@ class Hangman extends Component {
     return answer['word']
       .split("")
       .map(ltr => (guessed.has(ltr) ? ltr : "_"));
+  }
+  componentDidUpdate()
+  {
+    if(this.state.nWrong==5)
+    {
+      this.onCompleteGame()
+    }
   }
 
   /** handleGuest: handle a guessed letter:
@@ -84,6 +101,35 @@ class Hangman extends Component {
     ));
   }
 
+  questionSubmit(data)
+  {
+    if(!data.isCorrect)
+    {
+        this.setState((prev)=>({nWrong:prev.nWrong+1}))
+    }
+    else
+    {
+      this.setState((prev)=>({score:prev.score+10}))
+    }
+
+  }
+
+  onCompleteGame(e)
+  {
+    Axios.post('api/post-game-result', { score: this.state.score }).then(({ data }) => {
+      this.setState({submitted:true})
+      toast.success("Scores Submitted Successfully", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        draggable: true
+    })
+  }).catch(({ response }) => {
+      toast.error(response?.data?.message, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          draggable: true
+      })
+  })
+  }
+
   /** render: render game */
   render() {
     const { nWrong, answer} = this.state;
@@ -93,27 +139,24 @@ class Hangman extends Component {
     // const { guessedWord, generateButtons } = this;
 
     return (
-      <><h1 style={{textAlign:'center'}}>Hangman</h1>
+      <><Header/>
       <div className='Hangman'>
         <div><img src={images[nWrong]} alt={alternateText} /><p>Number Wrong: {nWrong}</p></div>
-        <div className='hangman-right'>
-          {answer['word'] === this.guessedWord().join("") ? <p>You WIN!</p> :
 
-            (nWrong === maxWrong ?
+        <div className='hangman-right'>
+        {
+             nWrong === maxWrong ?
               <div>
                 <p>YOU LOSE </p>
                 <p>Correct Word is: {answer['word']}</p>
-              </div>
-              :
-              <div>
-                <p className='Hangman-word'>{this.guessedWord()}</p>
-                <p>Clue:{answer['clue']}</p>
-                <p className='Hangman-btns'>{this.generateButtons()}</p>
-              </div>)}
+              </div>: <Quiz quiz={quiz} shuffle={true} onQuestionSubmit={this.questionSubmit} onComplete={this.onCompleteGame}/>
+        }
         </div>
-
-        <button id='reset' onClick={this.resetGame}>Reset Game</button>
-      </div></>
+        <div>Score:{this.state.score}</div>
+        {
+          !this.state.submitted &&      <button id='reset' onClick={this.onCompleteGame}>Exit</button>
+        }
+      </div>    <ToastContainer /></>
     );
   }
 }

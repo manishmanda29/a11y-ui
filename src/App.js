@@ -14,6 +14,8 @@ import ProtectedRoutes from './ProtectedRoutes'
 import CourseCompletion from './Pages/CourseCompletion';
 import Accessibility from './Pages/Accessibility';
 import HangMan from './Pages/HangMan'
+import Leaderboard from './Pages/Leaderboard';
+import Quiz from './Pages/Quiz'
 function App() {
   return (
     <>
@@ -28,6 +30,8 @@ function App() {
       <Route exact path="/certificate" element={<CourseCompletion/>}></Route>
       <Route path="/accessibility-testing" element={<Accessibility/>} />
       <Route exact path="/hang-man" element={<HangMan/>} />
+      <Route exact path="/Leaderboard" element={<Leaderboard/>} />
+      <Route exact path="/quiz" element={<Quiz/>} />
       <Route path="*" element={<Navigate to="/notfound"/>} />
      </Routes>
      <Footer/>

@@ -25,9 +25,9 @@ export const Header = () => {
                  <li>  <Link to={'/learn'}>Learn </Link> </li>
                   <li><Link to={'/hang-man'}> Games</Link></li>
 
-                <li><Link to={'/'}> Quizzes</Link></li>
+                <li><Link to={'/Quiz'}> Quizzes</Link></li>
 
-               <li><Link>Leaderboard</Link></li>
+               <li><Link to={'/Leaderboard'}>Leaderboard</Link></li>
                <li><Link to={'/learning-videos'}>Learning videos</Link></li>
 
                 <li><Link to={'/accessibility-testing'}>Accessibility Testing</Link></li>
