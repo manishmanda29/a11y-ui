@@ -65,7 +65,7 @@ class Hangman extends Component {
   }
   componentDidUpdate()
   {
-    if(this.state.nWrong==5)
+    if(this.state.nWrong==6 && this.state.submitted!=true)
     {
       this.onCompleteGame()
     }
@@ -109,7 +109,7 @@ class Hangman extends Component {
     }
     else
     {
-      this.setState((prev)=>({score:prev.score+10}))
+      this.setState((prev)=>({score:prev.score+20}))
     }
 
   }

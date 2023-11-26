@@ -6,13 +6,17 @@ import Axios from '../axios.js';
 import { useTimer } from 'react-timer-hook';
 import { toast, ToastContainer } from 'react-toastify';
 import './Quiz.css'
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Leaderboard() {
+    const navigate = useNavigate();
+    const optionHash= {0:'A',1:'B',2:'C',3:'D'}
     const time = new Date();
     const [state, setState] = useState('quiz');
     const [data, setData] = useState([])
-    const [answers, setAnswers] = useState([])
+    const [answers, setAnswers] = useState([]);
+    const [starting, setStarting] = useState(false);
     const {
         totalSeconds,
         seconds,
@@ -37,10 +41,12 @@ export default function Leaderboard() {
     }
 
     useEffect(() => {
+        if(starting==true)
+        {
         getQuestions()
         start()
-
-    }, [])
+        }
+    }, [starting])
 
     const handleValueChange = (e, el) => {
         let solution = { id: el.id, option: e.target.value }
@@ -64,27 +70,37 @@ export default function Leaderboard() {
         }
         return false
     }
-
-    useEffect(() => {
-        console.log(answers)
-
-    }, [answers])
-
     const handleSubmit = () => {
         Axios.post('/api/post-quiz-answers', { answers: answers }).then(({ data }) => {
             pause();
-            toast.success('Quiz Submitted Successfully')
-            console.log(data)
+            toast.success('Quiz Submitted Successfully,You will be navigated to Leaderboard')
+            setTimeout(() => {
+                navigate('/Leaderboard')
+
+            }, 3000)
         }).catch(({ response }) => {
             console.log(response.data.message)
         })
 
     }
+    const home = () => {
+        return (
+            <div style={{textAlign:'center'}}>
+                <h3>QUIZ</h3>
+                <p><b>Welcome to Accessibility Quiz !!!!</b><br></br>you will be give Multiple choice Questions and select answers and submit answers
+                  <br></br> There is also a timer of one minute please answer under that time
+                </p>
+                <button  onClick={(() => setStarting(true))} style={{width: 100, height:50 ,alignSelf:'center', background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10,color:'white',cursor:'pointer'}}>Start </button>
+
+            </div>
+        )
+    }
     return (
         <div>
             <Header />
-
-            <div style={{display :'flex',float:'right'}}>
+            {starting?
+            <div>
+            <div style={{ display: 'flex', float: 'right' }}>
                 <h3>Timer : </h3>
                 <div class="base-timer">
                     <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -106,9 +122,9 @@ export default function Leaderboard() {
                     <span id="base-timer-label" class="base-timer__label">{minutes}:{seconds}
                     </span>
                 </div>
-            <div style={{ paddingLeft: 16, paddingRight: 16, paddingTop: 8, paddingBottom: 8, background: '#3C813F', borderRadius: 28, justifyContent: 'flex-start', alignItems: 'flex-end', gap: 10, display: 'inline-flex', float: 'right', margin: 10, cursor: 'pointer' }}>
-                <div style={{ width: 118, height: 28, textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'Outfit', fontWeight: '400', wordWrap: 'break-word' }} onClick={handleSubmit}>Submit</div>
-            </div>
+                <div style={{ paddingLeft: 16, paddingRight: 16, paddingTop: 8, paddingBottom: 8, background: '#3C813F', borderRadius: 28, justifyContent: 'flex-start', alignItems: 'flex-end', gap: 10, display: 'inline-flex', float: 'right', margin: 10, cursor: 'pointer' }}>
+                    <div style={{ width: 118, height: 28, textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'Outfit', fontWeight: '400', wordWrap: 'break-word' }} onClick={handleSubmit}>Submit</div>
+                </div>
             </div>
             {
                 data.map((el, index) => {
@@ -117,21 +133,19 @@ export default function Leaderboard() {
                             <div style={{ width: '100%', height: '100%', color: '#333333', fontSize: 16, fontFamily: 'Ubuntu', fontWeight: '500', wordWrap: 'break-word', margin: 10 }}><b>{index + 1}:{el?.question}</b></div>
                             <div>
                                 {
-                                    el?.options.map((option) => {
+                                    el?.options.map((option,index) => {
                                         return (
-                                            <div style={{ width: '100%', height: '100%', color: '#333333', fontSize: 14, fontFamily: 'Ubuntu', fontWeight: '400', wordWrap: 'break-word', padding: 20 }}><input type="radio" value={option['option']} onChange={(e) => handleValueChange(e, el)} checked={isChecked(el, option['option'])}></input> {option['option-content']}</div>
+                                            <div style={{ width: '100%', height: '100%', color: '#333333', fontSize: 14, fontFamily: 'Ubuntu', fontWeight: '400', wordWrap: 'break-word', padding: 20 }}>{optionHash[index]}<input type="radio" value={option['option']} onChange={(e) => handleValueChange(e, el)} checked={isChecked(el, option['option'])}></input> {option['option-content']}</div>
 
                                         )
                                     })
                                 }
-                            </div></>
+                            </div>
+                        </>
                     )
-
-
                 })
             }
-            <ToastContainer />
-
+            <ToastContainer /></div>:home()}
         </div>
     )
 
