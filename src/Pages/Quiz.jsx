@@ -28,7 +28,7 @@ export default function Leaderboard() {
         pause,
         resume,
         restart,
-    } = useTimer({ expiryTimestamp: time.setSeconds(time.getSeconds() + 60), onExpire: () => handleSubmit() });
+    } = useTimer({ expiryTimestamp: time.setSeconds(time.getSeconds() + 600), onExpire: () => handleSubmit() });
 
 
     const getQuestions = () => {
@@ -130,12 +130,12 @@ export default function Leaderboard() {
                 data.map((el, index) => {
                     return (
                         <>
-                            <div style={{ width: '100%', height: '100%', color: '#333333', fontSize: 16, fontFamily: 'Ubuntu', fontWeight: '500', wordWrap: 'break-word', margin: 10 }}><b>{index + 1}:{el?.question}</b></div>
+                            <div style={{ width: '100%', height: '100%', color: '#333333', fontSize: 24, fontFamily: 'Ubuntu', fontWeight: '500', wordWrap: 'break-word', margin: 10 }}><b>{index + 1}:{el?.question}</b></div>
                             <div>
                                 {
                                     el?.options.map((option,index) => {
                                         return (
-                                            <div style={{ width: '100%', height: '100%', color: '#333333', fontSize: 14, fontFamily: 'Ubuntu', fontWeight: '400', wordWrap: 'break-word', padding: 20 }}>{optionHash[index]}<input type="radio" value={option['option']} onChange={(e) => handleValueChange(e, el)} checked={isChecked(el, option['option'])}></input> {option['option-content']}</div>
+                                            <div style={{ width: '100%', height: '100%', color: '#333333', fontSize: 18, fontFamily: 'Ubuntu', fontWeight: '400', wordWrap: 'break-word', padding: 20 }}>{optionHash[index]}<input type="radio" value={option['option']} onChange={(e) => handleValueChange(e, el)} checked={isChecked(el, option['option'])}></input> {option['option-content']}</div>
 
                                         )
                                     })

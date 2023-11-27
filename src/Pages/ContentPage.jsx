@@ -24,6 +24,7 @@ import { useRef } from "react";
 import { compareRef, stringify } from "react-ref-compare";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
+const TOTAL_TOPICS=3
 
 export default function ContentPage() {
 
@@ -184,6 +185,13 @@ export default function ContentPage() {
         console.log(e.currentTarget.id)
         setSelected(e.currentTarget.id)
     }
+
+    const handleNext=()=>{
+        setSelected((prev)=>prev+1)
+    }
+    const handlePrevious=()=>{
+        setSelected((prev)=>prev-1)
+    }
     // let content = data && data?.content && data?.content?.find((el) => el?.title === selected)
     return (
 
@@ -205,6 +213,7 @@ export default function ContentPage() {
                             type="text"
                             value={search}
                             required
+                            autoComplete="off"
                             onChange={(event) =>
                                 setSearch(event.target.value)
                             }          onFocus={()=>getRecommendations()}></Input>
@@ -235,7 +244,7 @@ export default function ContentPage() {
                 <div style={{ flex: 3 }} className='right-side'>
                     <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                         {
-                            progressData?.remainedTopics && progressData?.remainedTopics.length == 0 && <Link to={'/certificate'}><button style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }}>Certificate</button></Link>
+                            progress==100 && <Link to={'/certificate'}><button style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }}>Certificate</button></Link>
                         }
                         <CircularProgressbar className={'progress-bar'} value={progress} text={`${progress}%`} />
                     </div>
@@ -253,7 +262,12 @@ export default function ContentPage() {
                         <button style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }}>Completed</button> :
                         <button style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }} onClick={sendCompletedTopic}>Complete </button>
                     }
-                </div>
+                    <div style={{display:'flex',justifyContent:'flex-end'}}>
+                    {
+                       selected!=1 && <button style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }} onClick={handlePrevious}>Previous</button> 
+                    }
+                    {selected !== TOTAL_TOPICS &&<button style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }} onClick={handleNext}>Next</button> 
+                    }</div></div>
 
                 <ToastContainer />
 

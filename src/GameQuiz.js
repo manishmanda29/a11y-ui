@@ -1,12 +1,11 @@
 export const quiz =  {
     "quizTitle": "Hang Man",
-    "quizSynopsis": "Multiple choice questions will be displayed , please select a choice and you have total 6 chances to in game",
+    "quizSynopsis": "Multiple choice questions will be displayed , please select a choice and you have total 6 chances to Win game",
     "nrOfQuestions": "9",
     "questions": [
       {
         "question": "What does the acronym WCAG stand for in the context of web accessibility?",
         "questionType": "text",
-        "questionPic": "https://dummyimage.com/600x400/000/fff&text=X", // if you need to display Picture in Question
         "answerSelectionType": "single",
         "answers": [
         "Web Content Analysis Guide",

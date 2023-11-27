@@ -152,7 +152,8 @@ class Hangman extends Component {
               </div>: <Quiz quiz={quiz} shuffle={true} onQuestionSubmit={this.questionSubmit} onComplete={this.onCompleteGame}/>
         }
         </div>
-        <div>Score:{this.state.score}</div>
+        <div style={{ alignSelf: 'baseline',
+    margin: 10}}> <b>Score: {this.state.score}</b></div>
         {
           !this.state.submitted &&      <button id='reset' onClick={this.onCompleteGame}>Exit</button>
         }
