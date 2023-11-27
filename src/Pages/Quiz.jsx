@@ -7,7 +7,7 @@ import { useTimer } from 'react-timer-hook';
 import { toast, ToastContainer } from 'react-toastify';
 import './Quiz.css'
 import { useNavigate } from 'react-router-dom';
-
+import quizhome from '../images/quizhome.jpg'
 
 export default function Leaderboard() {
     const navigate = useNavigate();
@@ -85,13 +85,17 @@ export default function Leaderboard() {
     }
     const home = () => {
         return (
-            <div style={{textAlign:'center'}}>
-                <h3>QUIZ</h3>
-                <p><b>Welcome to Accessibility Quiz !!!!</b><br></br>you will be give Multiple choice Questions and select answers and submit answers
+            <div style={{display:'flex',flexDirection:'row-reverse'}}>
+            <div style={{}}>
+                <img src={quizhome}></img>
+            </div>
+            <div style={{alignSelf:'center',textAlign:'center'}}>
+                <p style={{fontSize:24}}><b>Welcome to Accessibility Quiz !!!!</b><br></br>you will be give Multiple choice Questions and select answers and submit answers
                   <br></br> There is also a timer of one minute please answer under that time
+                  <br></br>Click on Start to play
                 </p>
                 <button  onClick={(() => setStarting(true))} style={{width: 100, height:50 ,alignSelf:'center', background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10,color:'white',cursor:'pointer'}}>Start </button>
-
+            </div>
             </div>
         )
     }

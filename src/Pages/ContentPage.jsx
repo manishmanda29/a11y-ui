@@ -30,7 +30,7 @@ export default function ContentPage() {
 
     const [data, setData] = useState([])
     const [content, setContent] = useState([])
-    const [selected, setSelected] = useState()
+    const [selected, setSelected] = useState(1)
     const [progressData, setProgressData] = useState({})
     const [progress, setProgress] = useState(0);
     const [search,setSearch]=useState('');
