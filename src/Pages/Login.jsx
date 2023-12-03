@@ -1,7 +1,7 @@
 import Footer from "../components/Footer.jsx";
 import LoginImage from '../images/LoginImage.jpg';
 import './Login.css';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage} from 'formik';
 import Button from '@mui/material/Button';
 import BlueLogo from '../images/BlueLogo.svg';
 import axios from 'axios';
@@ -70,7 +70,6 @@ export default function Login() {
                     </div>
                     <Formik
                         initialValues={{ email: '', password: '' }}
-                        validate={validateForm}
                         onSubmit={postLoginData}
                     >
                         {() => (
