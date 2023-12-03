@@ -37,7 +37,7 @@ export default function LearninVideos() {
                 <h1>Learning Videos</h1>
                 <div>
                     {
-                        Link.length > 0 ? Link.map((data) => {
+                        Link && Link?.length > 0 ? Link.map((data) => {
                             return <YoutubeEmbed embedId={data.link} key={data.id} /> // Added key prop for each YoutubeEmbed component
                         }) : <div>No videos Found</div>
                     }
