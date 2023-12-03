@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ContentPage.css';
 import CardTitle from '../components/Card.jsx';
-import CircularProgressbar from 'react-circular-progressbar';
+import {CircularProgressbar} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
