@@ -1,20 +1,7 @@
-import Footer from "../components/Footer.jsx";
-import LoginImage from '../images/LoginImage.jpg';
-import './Login.css'
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import Button from '@mui/material/Button';
-import BlueLogo from '../images/BlueLogo.svg';
-import axios from 'axios'
-import Axios from '../axios.js'
-import 'react-toastify/dist/ReactToastify.css'
-import { toast, ToastContainer } from 'react-toastify'
-import { Link } from 'react-router-dom'
-import YoutubeEmbed from "../components/YoutubeEmbed.jsx";
-import { useEffect, useState } from "react";
-import { Header } from '../components/Header.jsx'
-import './ContentPage.css'
-import CardTitle from "../components/Card.jsx";
-import { CircularProgressbar } from 'react-circular-progressbar';
+import React, { useEffect, useState } from 'react';
+import './ContentPage.css';
+import CardTitle from '../components/Card.jsx';
+import {CircularProgressbar} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
@@ -22,13 +9,18 @@ import Input from '@mui/joy/Input';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import { useRef } from "react";
 import { compareRef, stringify } from "react-ref-compare";
+import { Header } from '../components/Header.jsx';
+import { toast, ToastContainer } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Axios from '../axios.js';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 const TOTAL_TOPICS=3
 
 export default function ContentPage() {
-
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
     const [content, setContent] = useState([])
     const [selected, setSelected] = useState(1)
     const [progressData, setProgressData] = useState({})
@@ -49,11 +41,11 @@ export default function ContentPage() {
         }).catch(({ response }) => {
             toast.error(response.data.message, {
                 position: toast.POSITION.BOTTOM_RIGHT,
-                draggable: true
-            })
-        })
+                draggable: true,
+            });
+        });
+    };
 
-    }
     const sendCompletedTopic = () => {
         Axios.post('api/set-learning-progress', { contentTitle: selected }).then(({ data }) => {
             getLearningProgress();
@@ -92,22 +84,19 @@ export default function ContentPage() {
 
 
         }
-
-    }
-
+    };
 
     const getLearningProgress = () => {
         Axios.get('api/get-learning-progress').then(({ data }) => {
-            console.log(data)
-            setProgressData({ ...data })
+            setProgressData({ ...data });
         }).catch(({ response }) => {
-            console.log(response.data.message)
+            console.log(response.data.message);
             toast.error(response.data.message, {
                 position: toast.POSITION.BOTTOM_RIGHT,
-                draggable: true
-            })
-        })
-    }
+                draggable: true,
+            });
+        });
+    };
 
     const topicHandler = (e) => {
         console.log(e.currentTarget.id)
@@ -194,7 +183,6 @@ export default function ContentPage() {
     }
     // let content = data && data?.content && data?.content?.find((el) => el?.title === selected)
     return (
-
         <div>
             <Header />
             <div style={{ display: 'flex', gap: '20px' }}>
@@ -248,15 +236,15 @@ export default function ContentPage() {
                         }
                         <CircularProgressbar className={'progress-bar'} value={progress} text={`${progress}%`} />
                     </div>
-                    <div className="content">
-                        {
-                            content ?
-                                <>
-                                    <h2>{content?.title}</h2>
-                                    <p>{content?.description}</p>
-                                </> : <h5>Content Not found</h5>
-                        }
-
+                    <div className='content'>
+                        {content ? (
+                            <>
+                                <h2>{content?.title}</h2>
+                                <p>{content?.description}</p>
+                            </>
+                        ) : (
+                            <h5>Content Not found</h5>
+                        )}
                     </div>
                     {progressData?.completedTopics && progressData?.completedTopics.find((data) => data === selected) ?
                         <button style={{ alignSelf: 'flex-end', width: 96, height: 38, margin: 10, background: 'linear-gradient(0deg, #4584FF 0%, #4584FF 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)', borderRadius: 10, color: 'white', cursor: 'pointer' }}>Completed</button> :
@@ -270,8 +258,7 @@ export default function ContentPage() {
                     }</div></div>
 
                 <ToastContainer />
-
             </div>
         </div>
-    )
+    );
 }
