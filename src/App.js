@@ -20,7 +20,7 @@ function App() {
       <Route exact path='/' element={<Home/>}/>
       <Route exact path='/sign-up' element={<SignUp/>}/>
       <Route exact  path='/login' element={<Login/>}/>
-      <Route exact path='/learning-videos' element={<ProtectedRoutes><LearningVideos/></ProtectedRoutes>}/>
+      <Route exact path='/learning-videos' element={<LearningVideos/>}/>
       <Route exact path='/notfound' element={<NotFound/>}/>
       <Route exact path='/home' element={<Home/>}/>
       <Route exact path='/learn' element={<ContentPage/>}></Route>
