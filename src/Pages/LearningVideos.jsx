@@ -32,18 +32,24 @@ export default function LearninVideos() {
 
     return (
         <div>
-            <Header />
-            <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                <h1>Learning Videos</h1>
-                <div>
-                    {
-                        Link && Link?.length > 0 ? Link.map((data) => {
-                            return <YoutubeEmbed embedId={data.link} key={data.id} /> // Added key prop for each YoutubeEmbed component
-                        }) : <div>No videos Found</div>
-                    }
-                </div>
-
-            </div>
+        <Header />
+        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+          <h1>Learning Videos</h1>
+          <div>
+            {
+              Link && Link?.length > 0 ? Link.map((data, index) => {
+                return (
+                  <div key={index}>
+                    {/* Provide alternative text for the embedded YouTube videos */}
+                    <span style={{ color: '#333333', fontSize: 18, fontFamily: 'Arial', fontWeight: '400', wordWrap: 'break-word', padding: 20 }}>Video {index + 1}</span>
+                    <YoutubeEmbed embedId={data.link} />
+                  </div>
+                );
+              }) : <div>No videos Found</div>
+            }
+          </div>
         </div>
+      </div>
+      
     );
 }

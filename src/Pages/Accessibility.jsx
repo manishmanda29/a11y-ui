@@ -36,57 +36,57 @@ export default function Accessibility() {
   }, [data])
   return (
     <>
-      <Header />
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-        <h1 >Accessibility Testing</h1>
-        <div style={{ display: 'flex',flexDirection:'column',alignItems:'center'}}>
-          <form style={{ width: '60%' }} onSubmit={handleSubmit} id="demo">
-            <FormControl>
-              <FormLabel
-                sx={(theme) => ({
-                  '--FormLabel-color': theme.vars.palette.primary.plainColor,
-                })}
+      <>
+  <Header />
+  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+    <h1>Accessibility Testing</h1>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <form style={{ width: '60%' }} onSubmit={handleSubmit} id="demo">
+        <FormControl>
+          {/* Add a form label for context */}
+          <FormLabel>Please Enter URL</FormLabel>
+          <Input
+            sx={{ '--Input-decoratorChildHeight': '45px' }}
+            placeholder="Please Enter URL"
+            type="url"
+            pattern="https://.*"
+            value={data}
+            required
+            onChange={(event) => setData(event.target.value)}
+            endDecorator={
+              <Button
+                variant="solid"
+                color="primary"
+                type="submit"
+                sx={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
               >
-              </FormLabel>
-              <Input
-                sx={{ '--Input-decoratorChildHeight': '45px' }}
-                placeholder="Please Enter URL"
-                type="url"
-                pattern="https://.*"
-                value={data}
-                required
-                onChange={(event) =>
-                  setData(event.target.value)
-                }
-                endDecorator={
-                  <Button
-                    variant="solid"
-                    color="primary"
-                    type="submit"
-                    sx={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
-                  >
-                    submit
-                  </Button>
-                }></Input>
-            </FormControl>
-          </form>
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            <h4>Results</h4>
-            <div style={{ border: 'black solid 2px', width: 500, height: 400, display: 'flex', flexDirection: 'column', borderRadius: '10%' }}>
-              <div  style={{display:'flex',flexDirection:'column',alignItems:'center',margin:10}}>
-                <WarningIcon style={{color:'yellow'}}></WarningIcon>
-                <span><b>Warning</b></span>
-                <p>{result['alerts'] && Object.entries(result['alerts']['items']).map((data) => data[1]['description'])}</p>
-              </div>
-              <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
-                <ErrorIcon style={{color:'red'}}></ErrorIcon>
-                <span><b>Errors</b></span>
-                <p>{result['errors'] && Object.entries(result['errors']['items']).map((data) => data[1]['description'])}</p>
-              </div>
-              </div>
-            </div>
+                submit
+              </Button>
+            }
+          />
+        </FormControl>
+      </form>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <h4>Results</h4>
+        <div style={{ border: 'black solid 2px', width: 500, height: 400, display: 'flex', flexDirection: 'column', borderRadius: '10%' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: 10 }}>
+            {/* Add alternative text for icons */}
+            <WarningIcon style={{ color: 'yellow' }} aria-label="Warning Icon"></WarningIcon>
+            <span><b>Warning</b></span>
+            <p>{result['alerts'] && Object.entries(result['alerts']['items']).map((data) => data[1]['description'])}</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            {/* Add alternative text for icons */}
+            <ErrorIcon style={{ color: 'red' }} aria-label="Error Icon"></ErrorIcon>
+            <span><b>Errors</b></span>
+            <p>{result['errors'] && Object.entries(result['errors']['items']).map((data) => data[1]['description'])}</p>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</>
+
     </>
   )
 }

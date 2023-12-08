@@ -11,48 +11,41 @@ export const Header = () => {
     navigate('/login')
   }
   return (
-    <div class="header">
-
+    <div className="header">
     <nav>
-
-        <img src={whiteLogo}/>
-
-        <div class="menu">
-
-            <ul>
-
-                 <li><Link to={'/home'}>Home</Link></li>
-                 <li>  <Link to={'/learn'}>Learn </Link> </li>
-                  <li><Link to={'/hang-man'}> Games</Link></li>
-
-                <li><Link to={'/Quiz'}> Quizzes</Link></li>
-
-               <li><Link to={'/Leaderboard'}>Leaderboard</Link></li>
-               <li><Link to={'/learning-videos'}>Learning videos</Link></li>
-
-                <li><Link to={'/accessibility-testing'}>Accessibility Testing</Link></li>
-            </ul>
-
-        </div>
-
-        <div style={{display:'flex',gap:20}}class="container">
-          {!token?
+      <img src={whiteLogo} alt="Your Logo Alt Text" />
+  
+      <div className="menu">
+        <ul>
+          <li><Link to={'/home'}>Home</Link></li>
+          <li><Link to={'/learn'}>Learn</Link></li>
+          <li><Link to={'/hang-man'}>Games</Link></li>
+          <li><Link to={'/Quiz'}>Quizzes</Link></li>
+          <li><Link to={'/Leaderboard'}>Leaderboard</Link></li>
+          <li><Link to={'/learning-videos'}>Learning videos</Link></li>
+          <li><Link to={'/accessibility-testing'}>Accessibility Testing</Link></li>
+        </ul>
+      </div>
+  
+      <div style={{ display: 'flex', gap: 20 }} className="container">
+        {!token ?
           <>
-           <Link to={'/sign-up'}><button class="log">Register</button></Link>
-
-           <Link to={'/login'}><button class="reg">Login</button></Link>
-           </>: <button class="reg" onClick={handleLogout}>Logout</button>
-          }
-        </div>
-
+            <Link to={'/sign-up'}>
+              <button className="log">Register</button>
+            </Link>
+  
+            <Link to={'/login'}>
+              <button className="reg">Login</button>
+            </Link>
+          </> :
+          <button className="reg" onClick={handleLogout}>Logout</button>
+        }
+      </div>
     </nav>
-
+  
     {/* <div class="banner-text">
-
-        <button style={{width:150,height:50}}type="button">Get Started</button>
-
-    </div>         */}
-
-</div>
+      <button style={{ width: 150, height: 50 }} type="button">Get Started</button>
+    </div> */}
+  </div>
   )
 };

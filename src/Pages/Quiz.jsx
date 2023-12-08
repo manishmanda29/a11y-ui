@@ -101,56 +101,66 @@ export default function Leaderboard() {
     }
     return (
         <div>
-            <Header />
-            {starting?
-            <div>
+        <Header />
+        {starting ?
+          <div>
             <div style={{ display: 'flex', float: 'right' }}>
-                <h3>Timer : </h3>
-                <div class="base-timer">
-                    <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <g class="base-timer__circle">
-                            <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
-                            <path
-                                id="base-timer-path-remaining"
-                                stroke-dasharray="283"
-                                class="base-timer__path-remaining ${remainingPathColor}"
-                                d="
-          M 50, 50
-          m -45, 0
-          a 45,45 0 1,0 90,0
-          a 45,45 0 1,0 -90,0
-        "
-                            ></path>
-                        </g>
-                    </svg>
-                    <span id="base-timer-label" class="base-timer__label">{minutes}:{seconds}
-                    </span>
-                </div>
-                <div style={{ paddingLeft: 16, paddingRight: 16, paddingTop: 8, paddingBottom: 8, background: '#3C813F', borderRadius: 28, justifyContent: 'flex-start', alignItems: 'flex-end', gap: 10, display: 'inline-flex', float: 'right', margin: 10, cursor: 'pointer' }}>
-                    <div style={{ width: 118, height: 28, textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'Outfit', fontWeight: '400', wordWrap: 'break-word' }} onClick={handleSubmit}>Submit</div>
-                </div>
+              <h3>Timer : </h3>
+              <div className="base-timer">
+                <svg className="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <g className="base-timer__circle">
+                    <circle className="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+                    <path
+                      id="base-timer-path-remaining"
+                      stroke-dasharray="283"
+                      class="base-timer__path-remaining ${remainingPathColor}"
+                      d="
+                      M 50, 50
+                      m -45, 0
+                      a 45,45 0 1,0 90,0
+                      a 45,45 0 1,0 -90,0
+                    "
+                    ></path>
+                  </g>
+                </svg>
+                <span id="base-timer-label" className="base-timer__label">{minutes}:{seconds}</span>
+              </div>
+              <div style={{ paddingLeft: 16, paddingRight: 16, paddingTop: 8, paddingBottom: 8, background: '#3C813F', borderRadius: 28, justifyContent: 'flex-start', alignItems: 'flex-end', gap: 10, display: 'inline-flex', float: 'right', margin: 10, cursor: 'pointer' }}>
+                <div style={{ width: 118, height: 28, textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'Outfit', fontWeight: '400', wordWrap: 'break-word' }} onClick={handleSubmit}>Submit</div>
+              </div>
             </div>
             {
-                data.map((el, index) => {
-                    return (
-                        <>
-                            <div style={{ width: '100%', height: '100%', color: '#333333', fontSize: 24, fontFamily: 'Ubuntu', fontWeight: '500', wordWrap: 'break-word', margin: 10 }}><b>{index + 1}:{el?.question}</b></div>
-                            <div>
-                                {
-                                    el?.options.map((option,index) => {
-                                        return (
-                                            <div style={{ width: '100%', height: '100%', color: '#333333', fontSize: 18, fontFamily: 'Ubuntu', fontWeight: '400', wordWrap: 'break-word', padding: 20 }}>{optionHash[index]}<input type="radio" value={option['option']} onChange={(e) => handleValueChange(e, el)} checked={isChecked(el, option['option'])}></input> {option['option-content']}</div>
-
-                                        )
-                                    })
-                                }
+              data.map((el, index) => {
+                return (
+                  <div key={index}>
+                    <div style={{ width: '100%', height: '100%', color: '#333333', fontSize: 24, fontFamily: 'Ubuntu', fontWeight: '500', wordWrap: 'break-word', margin: 10 }}><b>{index + 1}:{el?.question}</b></div>
+                    <div>
+                      {
+                        el?.options.map((option, optionIndex) => {
+                          return (
+                            <div key={optionIndex} style={{ width: '100%', height: '100%', color: '#333333', fontSize: 18, fontFamily: 'Ubuntu', fontWeight: '400', wordWrap: 'break-word', padding: 20 }}>
+                              <label htmlFor={`option-${index}-${optionIndex}`} style={{ marginRight: '10px' }}>{optionHash[optionIndex]}</label>
+                              <input
+                                type="radio"
+                                id={`option-${index}-${optionIndex}`}
+                                value={option['option']}
+                                onChange={(e) => handleValueChange(e, el)}
+                                checked={isChecked(el, option['option'])}
+                              />
+                              <span>{option['option-content']}</span>
                             </div>
-                        </>
-                    )
-                })
+                          );
+                        })
+                      }
+                    </div>
+                  </div>
+                );
+              })
             }
-            <ToastContainer /></div>:home()}
-        </div>
+            <ToastContainer />
+          </div> : home()}
+      </div>
+      
     )
 
 }

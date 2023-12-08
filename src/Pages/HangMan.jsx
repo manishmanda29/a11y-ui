@@ -139,25 +139,35 @@ class Hangman extends Component {
     // const { guessedWord, generateButtons } = this;
 
     return (
-      <><Header/>
+      <>
+      <Header />
       <div className='Hangman'>
-        <div><img src={images[nWrong]} alt={alternateText} /><p>Number Wrong: {nWrong}</p></div>
-
-        <div className='hangman-right'>
-        {
-             nWrong === maxWrong ?
-              <div>
-                <p>YOU LOSE </p>
-                <p>Correct Word is: {answer['word']}</p>
-              </div>: <Quiz quiz={quiz} shuffle={true} onQuestionSubmit={this.questionSubmit} onComplete={this.onCompleteGame}/>
-        }
+        <div>
+          <img src={images[nWrong]} alt={`Hangman Image - Incorrect Attempt ${nWrong}`} />
+          <p>Number Wrong: {nWrong}</p>
         </div>
-        <div style={{ alignSelf: 'baseline',
-    margin: 10}}> <b>Score: {this.state.score}</b></div>
-        {
-          !this.state.submitted &&      <button id='reset' onClick={this.onCompleteGame}>Exit</button>
+    
+        <div className='hangman-right'>
+          {nWrong === maxWrong ?
+            <div>
+              <p>YOU LOSE </p>
+              <p>Correct Word is: {answer['word']}</p>
+            </div> :
+            <Quiz quiz={quiz} shuffle={true} onQuestionSubmit={this.questionSubmit} onComplete={this.onCompleteGame} />
+          }
+        </div>
+    
+        <div style={{ alignSelf: 'baseline', margin: 10 }}>
+          <b>Score: {this.state.score}</b>
+        </div>
+    
+        {!this.state.submitted &&
+          <button id='reset' onClick={this.onCompleteGame}>Exit</button>
         }
-      </div>    <ToastContainer /></>
+      </div>
+      <ToastContainer />
+    </>
+    
     );
   }
 }
